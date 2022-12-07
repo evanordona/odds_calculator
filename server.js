@@ -1,3 +1,4 @@
+import { scrapeData } from './dataScraper.js';
 import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
@@ -45,7 +46,7 @@ app.get('/', async (req, res) => {
     } finally {
         client.close();
     }
-   
+
     res.send('deleted teams')
 })
 
@@ -69,9 +70,9 @@ app.get('/api', async (req, res) => {
             try {
                 await client.connect();
                 await createListing(client, team).catch(console.error);
-            }catch (e) {
+            } catch (e) {
                 console.error(e);
-            } 
+            }
 
         });
 
@@ -83,9 +84,12 @@ app.get('/api', async (req, res) => {
     res.send('finished');
 });
 
-// app.get('/calculate', async (req, res) => {
+app.get('/calculate', async (req, res) => {
 
-// });
+    const msg = await scrapeData(`https://www.actionnetwork.com/nba/odds`);
+    res.send(msg);
+
+});
 
 
 app.listen(portNumber, () => {
