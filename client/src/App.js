@@ -1,7 +1,6 @@
 import Navbar from './components/Navbar.js'
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import Home from './components/Home.js';
-
 
 function App() {
   return (
@@ -10,9 +9,9 @@ function App() {
         <meta charSet="utf-8" />
         <title>NBA Odds Calculator</title>
       </Helmet>
-       <Navbar />
-       <Home />
-        
+      <Navbar />
+      <Home />
+
     </div>
   );
 }

@@ -1,21 +1,31 @@
-const path = require('path');
-require("dotenv").config({path: path.resolve(__dirname, 'dontPost/.env')});
+import path from 'path';
+import dotenv from 'dotenv'
+dotenv.config({ path: path.resolve(process.cwd(), 'dontPost/.env') });
 
 const db_name = process.env.MONGO_DB_NAME;
 const collection_name = process.env.MONGO_COLLECTION;
-const databaseAndCollection = {db: db_name, collection: collection_name};
+const databaseAndCollection = { db: db_name, collection: collection_name };
 
 async function createListing(client, newListing) {
-   
-    try {
-        await client.connect();
-        const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newListing);
-    } catch (e) {
-        console.error('The error is', e);
-    } finally {
-        await client.close();
-    }
+
+    await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne(newListing, async (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Inserting ', newListing);
+        }
+    });
+
 }
 
-module.exports = {createListing};
+async function deleteAllTeams(client) {
+
+    await client.connect();
+    await client.db(databaseAndCollection.db)
+        .collection(databaseAndCollection.collection)
+        .deleteMany({});
+
+}
+
+export { createListing, deleteAllTeams };
 
