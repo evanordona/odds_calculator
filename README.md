@@ -1,3 +1,3 @@
 # Odds_calculator
 
-NBA Odds comparer.
+NBA Odds Comparer

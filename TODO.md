@@ -1,0 +1,4 @@
+- it can only call find teams once and then the client is closed hmmm...
+- Make the table look nicer
+- Add a form
+- Add links to Github
