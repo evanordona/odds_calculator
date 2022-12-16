@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import bgimg from '../assets/bgimg.png'
 import Table from './Table';
 
