@@ -7,6 +7,9 @@ import { createListing, deleteAllTeams, findTeamsByName } from './mongoFns.js';
 import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const userName = process.env.MONGO_DB_USERNAME;
 const passWord = process.env.MONGO_DB_PASSWORD;
@@ -24,18 +27,18 @@ const app = express();
 
 const portNumber = process.env.PORT || 5000;
 
-app.set("views", path.resolve(process.cwd(), "templates"));
+app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
-app.use(express.static(path.join(process.cwd(), "/client/build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended:false}));
+ 
 
 process.stdin.setEncoding('utf-8');
-
 
 //Updates MongoDB by first deleting all documents and then fetching new data from API and inserting new documents
 
@@ -71,6 +74,43 @@ app.get('/', async (req, res) => {
     res.send('finished')
 })
 
+app.post('/games', async (req, res) => {
+    const d = req.body.date;
+
+    let response = await fetch(`https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/${d}?key=${API_KEY}`);
+
+    if (!response.ok) {
+        throw new Error('HTTP error: ' + response.status);
+    }
+    const data = await response.json();
+    const games = [];
+    data.forEach((element) => {
+        const game = {
+            "name1": element["HomeTeam"],
+            "name2": element["AwayTeam"],
+            "points1": element["HomeTeamScore"],
+            "points2": element["AwayTeamScore"],
+        }
+        
+        games.push(game)
+    });
+
+    let table = "<table border='1'><tr><th>Game</th><th>Score</th></tr>";
+
+    
+    games.forEach((entry) => {
+            table += `<tr><td>${entry.name1} vs ${entry.name2}</td><td>${entry.points1} vs ${entry.points2}</td></tr>`;
+    });
+
+    table += "</table>";
+
+    const variables = {
+        gameTable: table
+    }
+
+    res.render('games-table', variables)
+
+})
 
 // Scrapes 
 app.get('/calculate', async (req, res) => {

@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar.js'
 import { Helmet } from 'react-helmet';
 import Home from './components/Home.js';
+import Form from './components/Form.js';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       </Helmet>
       <Navbar />
       <Home />
+      <Form />
 
     </div>
   );
