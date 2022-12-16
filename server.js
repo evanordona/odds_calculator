@@ -29,13 +29,16 @@ const portNumber = process.env.PORT || 5000;
 
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
+
 app.use(express.static(path.join(__dirname, "/client/build")));
 
-app.use(bodyParser.urlencoded({extended:false}));
- 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
 });
+
+
+app.use(bodyParser.urlencoded({extended:false}));
+ 
 
 process.stdin.setEncoding('utf-8');
 

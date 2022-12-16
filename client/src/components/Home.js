@@ -7,7 +7,7 @@ const Home = () => {
     const [formVisible, setFormVisible] = useState(false);
 
     const getData = async () => {
-        const result = await fetch("/calculate").catch((err) => { console.log(err) });
+        const result = await fetch("https://oddscalculator.herokuapp.com/calculate").catch((err) => { console.log(err) });
         const jsonResult = await result.json();
         console.log(jsonResult);
         setMatches([...jsonResult]);

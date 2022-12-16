@@ -11,7 +11,7 @@ const Form = () => {
             </div>
 
             <div className='flex justify-center items-center'>
-                <form action='/games' method='POST' className='flex flex-col w-full md:w-1/2'>
+                <form action='https://oddscalculator.herokuapp.com/games' method='POST' className='flex flex-col w-full md:w-1/2'>
                     <input type='text' name='date' placeholder='Enter a date (2015-JUL-31 : YEAR-MON-DAY)' className='p-2 bg-transparent border-2 rounded-md text-white focus:outline-none'/>
                   
                     <button className='text-white bg-gradient-to-b from-cyan-500 to-blue-500 px-6 py-3 my-5 mx-auto flex items-center rounded-md hover:scale-110 duration-300'>Get Games</button>
