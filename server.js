@@ -30,13 +30,6 @@ const portNumber = process.env.PORT || 5000;
 app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 
-app.use(express.static(path.join(__dirname, "/client/build")));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
-
-
 app.use(bodyParser.urlencoded({extended:false}));
  
 
@@ -118,6 +111,13 @@ app.get('/calculate', async (req, res) => {
     const msg = await scrapeData(`https://www.actionnetwork.com/nba/odds`);
     res.send(msg);
 });
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
 
 // Starts listening on localhost:{PORTNUMBER}
 app.listen(portNumber, () => {
