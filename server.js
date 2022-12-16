@@ -51,6 +51,7 @@ app.get('/', async (req, res) => {
         const data = await response.json();
         let count = 1;
         await data.forEach(async (element) => {
+            res.send('inserting...');
             const [normalName] = element["Name"].split(" ").slice(-1)
             const team = {
                 "name": normalName,
