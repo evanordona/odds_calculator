@@ -21,7 +21,7 @@ APIs used:
 https://sportsdata.io/nba-api
 
 YouTube Demo Video:
-
+https://www.youtube.com/watch?v=rsWYznlQXEA&ab_channel=imevano21
 
 NOTE:
 - Clicking the button will only make the table visible once.

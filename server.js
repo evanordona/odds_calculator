@@ -66,7 +66,6 @@ app.get('/', async (req, res) => {
         console.error(err);
     } 
 
-    res.send('finished')
 })
 
 app.post('/games', async (req, res) => {
