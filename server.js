@@ -33,6 +33,10 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.use(bodyParser.urlencoded({extended:false}));
  
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
 process.stdin.setEncoding('utf-8');
 
 //Updates MongoDB by first deleting all documents and then fetching new data from API and inserting new documents
