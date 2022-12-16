@@ -50,8 +50,7 @@ app.get('/', async (req, res) => {
         }
         const data = await response.json();
         let count = 1;
-        await data.forEach(async (element) => {
-            res.send('inserting...');
+        data.forEach(async (element) => {
             const [normalName] = element["Name"].split(" ").slice(-1)
             const team = {
                 "name": normalName,
@@ -61,7 +60,6 @@ app.get('/', async (req, res) => {
             await createListing(client, team);    
             console.log("Pushed element: ", element, count++);    
         });
-    
 
     } catch (err) {
         console.error(err);
