@@ -24,9 +24,12 @@ YouTube Demo Video:
 https://www.youtube.com/watch?v=rsWYznlQXEA&ab_channel=imevano21
 
 NOTE:
-- Clicking the button will only make the table visible once.
 - Scroll down to use a form that retrieves a team's stats
-
+- to run locally 
+    - add this line to the package.json file in the client directory: "proxy": "localhost:5000/",
+    - you will also need to change the form action to 'localhost:5000/games' within Form.js and replace "https://oddscalculator.herokuapp.com/calculate"
+      that's located in Home.js to 'localhost:5000/calculate'
+    - run 'npm i' and then 'npm start'. in another terminal enter 'cd client', 'npm i', and then 'npm start'
 
 
 
