@@ -31,13 +31,8 @@ app.set("views", path.resolve(__dirname, "templates"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "/client/build")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
-
 app.use(bodyParser.urlencoded({extended:false}));
  
-
 process.stdin.setEncoding('utf-8');
 
 //Updates MongoDB by first deleting all documents and then fetching new data from API and inserting new documents
